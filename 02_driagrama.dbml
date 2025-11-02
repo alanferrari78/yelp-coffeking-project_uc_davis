@@ -1,0 +1,62 @@
+Table tb_user {
+  user_id varchar [pk] 
+  name text
+  review_count integer
+  yelping_since timestamp
+  useful integer
+  funny integer
+  cool integer
+  elite text
+  friends text
+  fans integer
+  average_stars float
+  compliment_hot integer
+  compliment_more integer
+  compliment_profile integer
+  compliment_cute integer
+  compliment_list integer
+  compliment_note integer
+  compliment_plain integer
+  compliment_cool integer
+  compliment_funny integer
+  compliment_writer integer
+  compliment_photos integer}
+
+Table tb_business {
+  business_id varchar [pk] 
+  name text
+  address text
+  city varchar
+  state varchar
+  postal_code varchar
+  latitude float
+  longitude float
+  stars float
+  review_count integer
+  is_open integer
+  attributes jsonb
+  categories text
+  hours jsonb}
+
+Table tb_review {
+  review_id varchar [pk] // Chave Primária
+  user_id varchar [ref: > tb_user.user_id]
+  business_id varchar [ref: > tb_business.business_id]
+  stars float
+  useful integer
+  funny integer
+  cool integer
+  text text
+  date timestamp}
+
+Table tb_tip {
+  tip_id integer [pk, increment] // Chave Primária Auto-Incremental
+  user_id varchar [ref: > tb_user.user_id]
+  business_id varchar [ref: > tb_business.business_id]
+  text text
+  date timestamp
+  compliment_count integer}
+
+Table tb_checkin {
+  business_id varchar [pk, ref: - tb_business.business_id] 
+  date text // String longa com todas as datas}
